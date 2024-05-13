@@ -5,7 +5,9 @@ import axios from "axios";
 export default boot(async ({ app }) => {
   async function tokenInterceptor () {
     axios.interceptors.request.use(config => {
-      config.headers.Authorization = `Bearer ${app.config.globalProperties.$manager.getUser()?.access_token}`
+      app.config.globalProperties.$manager.getUser().then(user => {
+        config.headers.Authorization = `Bearer ${user.access_token}`
+      })
       return config
     }, error => {
       return Promise.reject(error)
