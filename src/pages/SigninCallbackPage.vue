@@ -1,5 +1,5 @@
 <template>
-  <p>Processing signin callback</p>
+  <p>Processing Login callback</p>
 </template>
 
 <script setup>

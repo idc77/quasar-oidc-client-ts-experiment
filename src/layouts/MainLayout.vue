@@ -24,19 +24,7 @@
       show-if-above
       bordered
     >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
+      <profile-card></profile-card>
     </q-drawer>
 
     <q-page-container>
@@ -47,7 +35,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import ProfileCard from "components/ProfileCard.vue";
 
 defineOptions({
   name: 'MainLayout'

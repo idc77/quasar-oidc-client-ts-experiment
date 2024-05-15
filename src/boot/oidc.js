@@ -20,12 +20,15 @@ export default boot(async ({ app }) => {
       client_id: process.env.CLIENT_ID,
       redirect_uri: window.location.origin + '/oidc-callback',
       post_logout_redirect_uri: window.location.origin,
-      monitorSession: true,
+      // monitorSession: true,
       response_type: 'code',
-      scope: 'openid email profile',
+      scope: 'openid email profile roles',
+      automaticSilentRenew: true,
+      // silent_redirect_uri: window.location.origin + '/oidc-callback',
     }
     app.use(VueOIDCClient, {
       settings: settings,
+      debug: true,
       redirectNavigator: undefined,
       popupNavigator: undefined,
       iframeNavigator: undefined,

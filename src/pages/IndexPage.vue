@@ -1,9 +1,15 @@
 <template>
   <q-page padding>
-    It works<br>
+    <div class="row justify-center">
+      This doesn't work with authentik, but works with keycloak, likely also with zitadel and hydra.<br>
+      Authentik doesn't sent CSP or X-FRAME-OPTIONS.<br>
+      Open the side drawer to login or logout.<br>
+      Change .env and .env.prod to adapt to your instance.<br>
+      Sadly one requires to install @vueuse/core for the computedAsync feature, because oidc-client-ts only works with Promises.
+    </div>
+
     <q-btn label="Login" @click="login"></q-btn><br>
     <q-btn label="Log" @click="log"></q-btn>
-    {{manager?.getUser().access_token}}
   </q-page>
 </template>
 
@@ -15,9 +21,7 @@ defineOptions({
   name: 'IndexPage'
 });
 
-const OIDCSymbol = VueOIDCClientSymbol
 const manager = inject(VueOIDCClientSymbol)
-console.log(manager)
 function login() {
   manager.signinRedirect().then(res => {
     console.log(res)
@@ -26,11 +30,9 @@ function login() {
   });
 }
 function log() {
-  console.log(manager)
-  console.log(manager.getUser())
-  console.log(manager.getUser()?.access_token)
+  console.log('access_token:', manager.getUser()?.access_token)
   manager.getUser().then(user => {
-    console.log(user)
+    console.log('user:',user)
   })
 }
 </script>
